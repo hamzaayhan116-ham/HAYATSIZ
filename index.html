@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HAYATSIZ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Giriş Ekranı Butonu */
+    #enter-btn {
+      padding: 16px 36px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, #6200ea, #03dac6);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #enter-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(3, 218, 198, 0.4);
+    }
+
+    /* Ana İçerik Konteyneri (Başlangıçta Gizli) */
+    #content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    /* Profil Resmi */
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #03dac6;
+      box-shadow: 0 0 20px rgba(3, 218, 198, 0.5);
+    }
+
+    /* Alt Yazı */
+    .status-text {
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      color: #cccccc;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Müzik Dosyası (loop parametresi döngüyü sağlar) -->
+  <audio id="bg-music" src="music.mp3" loop></audio>
+
+  <!-- Giriş Butonu -->
+  <button id="enter-btn" onclick="enterSite()">İçeri Gir</button>
+
+  <!-- Butona Basıldıktan Sonra Açılacak İçerik -->
+  <div id="content">
+    <img src="pp.jpg" alt="Profil Resmi" class="profile-img" />
+    <p class="status-text">Yapım Aşamasında...</p>
+  </div>
+
+  <script>
+    function enterSite() {
+      const music = document.getElementById('bg-music');
+      
+      // Müziğin döngüde olmasını garantiye al
+      music.loop = true;
+      music.play();
+
+      // Butonu gizle, içeriği göster
+      document.getElementById('enter-btn').style.display = 'none';
+      document.getElementById('content').style.display = 'flex';
+    }
+  </script>
+
+</body>
+</html>
