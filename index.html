@@ -12,9 +12,9 @@
     }
 
     body {
-      background-color: #0d0d0d;
+      background-color: #0a0a0c;
       color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -23,60 +23,100 @@
       overflow: hidden;
     }
 
-    /* Giriş Ekranı Butonu */
+    /* Yenilenmiş Modern Giriş Butonu */
     #enter-btn {
-      padding: 16px 36px;
-      font-size: 1.2rem;
+      position: relative;
+      padding: 18px 42px;
+      font-size: 1.1rem;
       font-weight: 600;
-      color: #fff;
-      background: linear-gradient(135deg, #6200ea, #03dac6);
-      border: none;
-      border-radius: 30px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      transition: transform 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Hover Parlama Efekti */
+    #enter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    #enter-btn:hover::before {
+      left: 100%;
     }
 
     #enter-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(3, 218, 198, 0.4);
+      transform: scale(1.08);
+      border-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.1);
     }
 
-    /* Ana İçerik Konteyneri (Başlangıçta Gizli) */
+    #enter-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Ana İçerik Konteyneri */
     #content {
       display: none;
       flex-direction: column;
       align-items: center;
       gap: 20px;
-      animation: fadeIn 1s ease-in-out forwards;
+      animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     /* Profil Resmi */
     .profile-img {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #03dac6;
-      box-shadow: 0 0 20px rgba(3, 218, 198, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
     }
 
     /* Alt Yazı */
     .status-text {
-      font-size: 1.5rem;
-      letter-spacing: 1px;
-      color: #cccccc;
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      color: #a0a0a0;
+      text-transform: uppercase;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { 
+        opacity: 0; 
+        transform: scale(0.9) translateY(10px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Müzik Dosyası (loop parametresi döngüyü sağlar) -->
+  <!-- Müzik Dosyası -->
   <audio id="bg-music" src="music.mp3" loop></audio>
 
   <!-- Giriş Butonu -->
@@ -85,18 +125,15 @@
   <!-- Butona Basıldıktan Sonra Açılacak İçerik -->
   <div id="content">
     <img src="pp1.jpg" alt="Profil Resmi" class="profile-img" />
-    <p class="status-text">Yapım Aşamasında... </p>
+    <p class="status-text">Yapım Aşamasında</p>
   </div>
 
   <script>
     function enterSite() {
       const music = document.getElementById('bg-music');
-      
-      // Müziğin döngüde olmasını garantiye al
       music.loop = true;
       music.play();
 
-      // Butonu gizle, içeriği göster
       document.getElementById('enter-btn').style.display = 'none';
       document.getElementById('content').style.display = 'flex';
     }
